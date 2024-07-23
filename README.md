@@ -2,8 +2,9 @@
 
 Este é um aplicativo Android simples desenvolvido com Jetpack Compose que permite calcular gorjetas e dividir a conta entre amigos.
 
-![Captura de tela 2024-07-23 143930](https://github.com/user-attachments/assets/96ff4a2c-a803-48d8-a9e8-dcfe558bd083)
-
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/96ff4a2c-a803-48d8-a9e8-dcfe558bd083" width="200px" />
+</div>
 
 ## Funcionalidades
 
@@ -27,13 +28,13 @@ Este é um aplicativo Android simples desenvolvido com Jetpack Compose que permi
 
 ## Instalação
 
-### 1. Clone este repositório:
+#### 1. Clone este repositório:
    ```sh
    git clone https://github.com/seu-usuario/JetTipApp.git
 ```
-### 2. Abra o projeto no Android Studio.
+#### 2. Abra o projeto no Android Studio.
 
-### 3. Execute o aplicativo em um emulador ou dispositivo Android.
+#### 3. Execute o aplicativo em um emulador ou dispositivo Android.
 
 ## Contribuições
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
