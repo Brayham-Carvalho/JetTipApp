@@ -1,5 +1,6 @@
 package com.bpc.jettipapp
 
+import android.app.Person
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -29,6 +30,7 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -111,21 +113,36 @@ fun TopHeader(totalPerPerson: Double = 0.0){
 @Preview
 @Composable
 fun MainContent(){
-    BillForm(){ billAmt ->
-        Log.d("AMT", "MainContent: $billAmt")}
+    //val range = IntRange(start = 1, endInclusive = 100)
+
+    val tipAmountState = remember {
+        mutableStateOf(0.0)
+    }
+    val splitByState = remember {
+        mutableStateOf(1)
+    }
+
+    val totalPerPersonState = remember {
+        mutableStateOf(0.0)
+    }
+    BillForm(splitByState = splitByState,
+        tipAmountState = tipAmountState,
+        totalPerPersonState = totalPerPersonState){ }
 
 }
 
 @Composable
 fun BillForm(modifier: Modifier = Modifier,
+             range: IntRange = 1..100,
+             splitByState: MutableState<Int>,
+             tipAmountState: MutableState<Double>,
+             totalPerPersonState: MutableState<Double>,
              onValueChange: (String) -> Unit = {}){
     val totalBillState = remember {
         mutableStateOf(value = "")
 
     }
-    val splitByState = remember {
-        mutableStateOf(1)
-    }
+
     val validState = remember(totalBillState.value) {
         totalBillState.value.trim().isNotEmpty()
     }
@@ -137,15 +154,7 @@ fun BillForm(modifier: Modifier = Modifier,
     }
     val tipPercentage = (sliderPositionState.value * 100).toInt()
 
-    val range = IntRange(start = 1, endInclusive = 100)
 
-    val tipAmountState = remember {
-        mutableStateOf(0.0)
-    }
-
-    val totalPerPersonState = remember {
-        mutableStateOf(0.0)
-    }
 
     Column(modifier = Modifier.fillMaxWidth().padding(10.dp)) {
         TopHeader(totalPerPerson = totalPerPersonState.value)
@@ -171,7 +180,7 @@ fun BillForm(modifier: Modifier = Modifier,
                         keyboardController?.hide()
                     }
                 )
-                //if (validState) {
+                if (validState) {
                 Row (modifier = Modifier.padding(3.dp),
                     horizontalArrangement = Arrangement.Start){
                     Text(text = "Dividir por: ",
@@ -236,6 +245,8 @@ fun BillForm(modifier: Modifier = Modifier,
 
 
                 }
+            } else {
+                    Box() {}
             }
         }
 
@@ -245,7 +256,7 @@ fun BillForm(modifier: Modifier = Modifier,
 
 
 
-@Preview(showBackground = true)
+
 @Composable
 fun GreetingPreview() {
     JetTipAppTheme {
@@ -254,4 +265,5 @@ fun GreetingPreview() {
             MainContent()
         }
     }
+}
 }
